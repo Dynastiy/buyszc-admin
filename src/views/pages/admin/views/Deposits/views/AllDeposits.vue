@@ -1,66 +1,113 @@
 <template>
   <div>
-    <h3 class="text-bold">All Deposits</h3>
+    <h3 class="text-xl font-bold">All Deposits</h3>
     <div class="mt-4 other--tables">
-      <!-- <div class="search--field d-flex align-items-center ml-auto">
-                    <span class="material-icons">
-                        search
-                    </span>
-                    <input type="search" v-model="search_data" name="" id="" placeholder="Search by Wallet Address or Reference No. . . " @keyup="getDeposit">
-                </div> -->
+      <div class="search--field d-flex align-items-center ml-auto my-4">
+        <span class="material-icons"> search </span>
+        <input
+          type="search"
+          v-model="search_data"
+          name=""
+          id=""
+          placeholder="Search by Wallet Address or Reference No. . . "
+          @keyup="getDeposits"
+        />
+      </div>
       <div class="table-responsive">
         <table class="table table-centered table-nowrap mb-0">
-          <thead>
+          <thead class="bg-[#000407] text-white">
             <tr>
               <th scope="col">Id</th>
               <th scope="col">Date</th>
               <th scope="col">Wallet Address</th>
-              <th scope="col">Amount (NGN)</th>
+              <th scope="col">Amount (GMD)</th>
               <th scope="col">Amount (BNB)</th>
-              <th scope="col">Amount (SZC)</th>
+              <!-- <th scope="col">Amount (SZC)</th> -->
               <th scope="col">Transaction Hash</th>
-              <th scope="col">Payment Proof</th>
+              <!-- <th scope="col">Payment Proof</th> -->
               <th scope="col">Status</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-if="loading">
-              Fetching Data . . .
-            </tr>
-            <tr v-for="(deposit, index) in deposits.data" :key="index" v-else>
+          <tbody v-if="!loading">
+            <tr
+              v-for="(deposit, index) in deposits.data"
+              :key="index"
+              class="cursor-pointer"
+            >
               <td>{{ index + 1 }}</td>
               <td>{{ timeStamp(deposit.created_at) }}</td>
               <td>{{ deposit.wallet_address }}</td>
-              <td>&#8358;{{ nairaFilter(deposit.amount_naira) }}</td>
+              <td>
+                {{ formatCurrency(deposit.amount_gambian_dalasi, "gmd") }}
+              </td>
               <td>
                 <span v-if="deposit.amount_bnb"
                   >{{ deposit.amount_bnb }} BNB</span
                 >
-                <span v-else>Null</span>
+                <span v-else>N/A</span>
               </td>
               <td>
                 <span v-if="deposit.amount_szc">{{ deposit.amount_szc }}</span>
                 <span v-else>Null</span>
               </td>
               <td>
-                <span v-if="deposit.transaction_hash">{{
-                  deposit.transaction_hash
-                }}</span>
-                <span v-else>Null</span>
-              </td>
-              <td>
-                <a
-                  target="_blank"
-                  :href="'https://api.buybnb.io/' + deposit.payment_proof"
-                >
-                  View Proof
-                </a>
-              </td>
-              <td>
                 <span :class="[deposit.status]"> {{ deposit.status }} </span>
               </td>
               <td>
+                <div class="flex justify-center">
+                  <div>
+                    <div class="dropdown relative">
+                      <a
+                        href="#"
+                        type="button"
+                        id="dropdownMenuButton2"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                          />
+                        </svg>
+                      </a>
+                      <ul
+                        class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                        aria-labelledby="dropdownMenuButton2"
+                      >
+                        <li>
+                          <a
+                            class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
+                            :href="`https://api.tradezugacoin.com/${deposit.payment_proof}`"
+                            target="_blank"
+                            >View Proof</a
+                          >
+                        </li>
+                        <li>
+                          <router-link
+                            :to="{
+                              path: `/admin/dashboard/deposits/${deposit.id}`,
+                            }"
+                            class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
+                            href="#"
+                            >View details</router-link
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <!-- <td>
                 <button
                   class="view--more--disabled"
                   disabled
@@ -79,13 +126,23 @@
                     Cancel
                   </button>
                 </div>
-              </td>
+              </td> -->
             </tr>
             <tr v-show="deposits.total === 0" class="text-danger">
               Nothing Here . . .
             </tr>
           </tbody>
         </table>
+        <div v-if="loading" class="h-96 flex items-center justify-center">
+          <div class="flex justify-center items-center">
+            <div
+              class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -144,6 +201,7 @@
 
 <script>
 import pagination from "@/components/appPagination.vue";
+
 import {
   nairaFilter,
   percentFilter,
@@ -170,6 +228,12 @@ export default {
     };
   },
   methods: {
+    formatCurrency(amount, currency) {
+      return amount.toLocaleString("en-US", {
+        style: "currency",
+        currency: currency,
+      });
+    },
     showPreview($event) {
       var input = event.target;
       this.credit_proof = input.files[0];
@@ -253,3 +317,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.table thead th {
+  color: white !important;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+</style>
