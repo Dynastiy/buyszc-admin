@@ -58,7 +58,9 @@
                 </td>
                 <td>
                   <router-link
-                    to=""
+                    :to="{
+                      path: `/user/deposit/${deposit.id}`,
+                    }"
                     class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded"
                     >View</router-link
                   >

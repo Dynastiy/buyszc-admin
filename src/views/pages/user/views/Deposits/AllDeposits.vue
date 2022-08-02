@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="font-bold text-xl">Completed Deposits</h3>
+    <h3 class="font-bold text-xl">All Deposits</h3>
     <!-- Transactions Table  -->
     <section class="mt-4">
       <div class="mt-4 other--tables">
@@ -20,12 +20,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(deposit, index) in completedDeposits" :key="index">
+              <tr v-for="(deposit, index) in deposits" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ timeStamp(deposit.created_at) }}</td>
                 <td>{{ deposit.wallet_address }}</td>
                 <td>
-                  &#8358;
                   {{
                     formatCurrency(Number(deposit.amount_gambian_dalasi), "gmd")
                   }}

@@ -24,7 +24,7 @@ const items = [
       {
         id: 1,
         menu_item: "All",
-        url: "/transactions",
+        url: "/user/deposit/all",
         icon: "money",
       },
 
@@ -60,7 +60,7 @@ const items = [
     sub_menu: [
       {
         id: 1,
-        menu_item: "Withdraw",
+        menu_item: "Withdrawals",
         url: "/user/withdrawals",
         icon: "money",
       },
@@ -82,6 +82,7 @@ const items = [
         menu_item: "Logout",
         url: "/sign-in",
         icon: "logout",
+        action: "logOut",
       },
     ],
   },

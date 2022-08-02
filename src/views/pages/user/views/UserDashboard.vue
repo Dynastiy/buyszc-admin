@@ -31,7 +31,7 @@
         <h6 class="mb-3">Balance</h6>
         <div class="flex flex-col gap-2 justify-between">
           <h1 class="font-bold">
-            {{ formatCurrency(userAccount, "gmb") }}
+            {{ formatCurrency(userAccount, "gmd") }}
           </h1>
           <h1 class="font-bold">ZSC - {{ userAccount / 0.0062 }}</h1>
         </div>

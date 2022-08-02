@@ -1,6 +1,7 @@
 const UserDashboard = () => import("../views/UserDashboard");
 const UserDeposit = () => import("../views/UserDeposit");
 const UserPendingDeposit = () => import("../views/Deposits/PendingDeposits");
+const UserAllDeposit = () => import("../views/Deposits/AllDeposits");
 const UserCancelledDeposit = () =>
   import("../views/Deposits/CancelledDeposits");
 const UserCompletedDeposit = () =>
@@ -56,6 +57,11 @@ export default [
         path: "/user/deposit/pending",
         name: "Dashboard - Deposit-Pending",
         component: UserPendingDeposit,
+      },
+      {
+        path: "/user/deposit/all",
+        name: "Dashboard - Deposit-All",
+        component: UserAllDeposit,
       },
       {
         path: "/user/deposit/cancelled",

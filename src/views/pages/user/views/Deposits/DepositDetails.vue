@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3 class="font-bold text-xl">Deposit Details</h3>
     <div v-if="deposit">
       <div class="flex justify-between items-center">
         <h3 class="font-bold md:text-xl">Deposit Details</h3>
@@ -29,12 +28,18 @@
             <h5 class="text-xs md:text-base">{{ deposit.wallet_address }}</h5>
           </div>
           <div class="flex justify-between items-center mt-4">
-            <h5 class="font-semibold text-sm md:text-base">Amount (Naira)</h5>
-            <h5 class="text-xs md:text-base">{{ deposit.amount_naira }}</h5>
+            <h5 class="font-semibold text-sm md:text-base">Transaction hash</h5>
+            <h5 class="text-xs md:text-base">{{ deposit.transaction_hash }}</h5>
           </div>
           <div class="flex justify-between items-center mt-4">
-            <h5 class="font-semibold text-sm md:text-base">Amount (SZC)</h5>
-            <h5 class="text-xs md:text-base">{{ deposit.amount_szc }}</h5>
+            <h5 class="font-semibold text-sm md:text-base">Amount (GMD)</h5>
+            <h5 class="text-xs md:text-base">
+              {{ deposit.amount_gambian_dalasi }}
+            </h5>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <h5 class="font-semibold text-sm md:text-base">Amount (BNB)</h5>
+            <h5 class="text-xs md:text-base">{{ deposit.amount_bnb }}</h5>
           </div>
           <div class="flex justify-between items-center mt-4">
             <h5 class="font-semibold text-sm md:text-base">Status</h5>
@@ -44,14 +49,14 @@
           </div>
         </div>
         <div class="flex space-x-2 justify-center mt-3">
-          <button
-            class="h-8 w-24 border-2 border-[#f0b90b] bg-transparent text-[#f0b90b] rounded-md"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModalCenter"
+          <a
+            :href="`https://api.tradezugacoin.com/${deposit.payment_proof}`"
+            target="_blank"
+            class="text-center h-8 w-24 border-2 border-[#f0b90b] bg-transparent text-[#f0b90b] rounded-md"
           >
             View Proof
-          </button>
-          <button
+          </a>
+          <!-- <button
             class="h-8 w-24 text-white bg-dark rounded-md"
             v-if="deposit.status !== 'completed'"
           >
@@ -62,7 +67,7 @@
             v-if="deposit.status !== 'completed'"
           >
             Cancel
-          </button>
+          </button> -->
         </div>
       </div>
 
@@ -84,6 +89,22 @@
 
 <script>
 export default {
+  data() {
+    return {
+      deposits: [],
+    };
+  },
+  computed: {
+    deposit() {
+      if (this.deposits) {
+        return this.deposits.find(
+          (deposit) => deposit.id == this.$route.params.id
+        );
+      } else {
+        return [];
+      }
+    },
+  },
   methods: {
     formatCurrency(amount, currency) {
       return amount.toLocaleString("en-US", {
@@ -91,17 +112,25 @@ export default {
         currency: currency,
       });
     },
-    async getDeposit() {
-      this.loading = true;
-      let res = await this.$axios.get(`/find-deposit/${this.$route.params.id}`);
-      console.log(res);
 
-      // console.log(this.deposits);
+    async getAnalytics() {
+      this.loading = true;
+      let res = await this.$axios.get("/user-dashboard");
+      console.log(res);
+      this.deposits = res.data.user_products_total.data[0].deposits;
       this.loading = false;
+      console.log(this.deposits);
     },
+    // async getDeposit() {
+    //   this.loading = true;
+    //   let res = await this.$axios.get(`/find-deposit/${this.$route.params.id}`);
+    //   console.log(res);
+    //   this.loading = false;
+    // },
   },
   async created() {
-    this.getDeposit();
+    // this.getDeposit();
+    this.getAnalytics();
   },
 };
 </script>
