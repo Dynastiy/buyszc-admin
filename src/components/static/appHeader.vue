@@ -118,7 +118,7 @@ export default {
   mounted() {
     const toggller = document.getElementById("tog");
     const sidee = document.getElementById("side-bar");
-    console.log(sidee);
+    // console.log(sidee);
     // const closeMenu = document.getElementById('close-menu');
     const bodyEl = document.getElementsByTagName("body")[0];
     document.onclick = function (e) {

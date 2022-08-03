@@ -98,7 +98,7 @@ export default {
           this.credentials
         );
 
-        console.log(res);
+        console.log("res");
         this.$toastify({
           text: `Welcome ${res.data.user.name}`,
           className: "info",

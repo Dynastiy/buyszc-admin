@@ -77,7 +77,7 @@ export default {
         const token = res.data.token;
         const user = res.data.user;
         this.$store.dispatch("login", { token, user });
-        console.log(res);
+        console.log("res");
         this.$toastify({
           text: `Welcome ${res.data.user.name}`,
           className: "info",

@@ -25,7 +25,7 @@ instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     // alert("requesting")
-    console.log(`${store.state.token}`);
+    // console.log(`${store.state.token}`);
     const token = `${store.state.token}`;
 
     if (token) {

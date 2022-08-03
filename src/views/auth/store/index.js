@@ -10,7 +10,7 @@ export default {
   },
   mutations: {
     SET_USER(state, data) {
-      console.log(data);
+      // console.log(data);
       state.user = data;
       state.token = data.auth_token;
     },
@@ -18,7 +18,7 @@ export default {
   actions: {
     // Login request
     async login({ commit }, data) {
-      console.log(data);
+      // console.log(data);
       try {
         let res = await request().post(`/auth/token/login/`, data, {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default {
 
         return res;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         return error.response;
       }
     },

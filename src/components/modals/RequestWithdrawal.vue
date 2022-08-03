@@ -141,7 +141,6 @@ export default {
     async withdraw() {
       try {
         let res = await this.$axios.post(`/make-withdrawal`, this.payload);
-        console.log(res);
 
         if (res.data.success != false) {
           this.$toastify({
@@ -157,7 +156,6 @@ export default {
 
         this.account = {};
       } catch (error) {
-        console.log(error.response);
         this.$toastify({
           text: ` ${error.response.data.message}`,
           className: "warning",
