@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import DashboardLayout from "../views/layouts/dashboardLayout.vue";
+// import DashboardLayout from "../views/layouts/dashboardLayout.vue";
 
 // Routes
 import authRoutes from "../views/auth/router";
@@ -12,73 +12,14 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: DashboardLayout,
-    children: [
-      {
-        path: "/",
-        name: "Dashboard",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/pages/dashboardView.vue"
-          ),
-      },
-      {
-        path: "/transactions",
-        name: "Transactions",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/pages/allTransactions.vue"
-          ),
-      },
-      {
-        path: "/pending",
-        name: "Pending",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/pages/pendingTransactions.vue"
-          ),
-      },
-      {
-        path: "/completed",
-        name: "completed",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/pages/completedTransactions.vue"
-          ),
-      },
-      {
-        path: "/cancelled",
-        name: "Cancelled",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/pages/cancelledTransactions.vue"
-          ),
-      },
-      {
-        path: "/user-list",
-        name: "User List",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/pages/userView.vue"),
-      },
-    ],
+    name: "Home",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/auth/views/HomeView.vue"
+      ),
   },
   {
     path: "/sign-in",
