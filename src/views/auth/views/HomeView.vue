@@ -6,17 +6,23 @@
       <div class="landing--page">
         <div class="main--content">
           <div class="container">
-            <div class="calculator--box">
+            <div class="calculator--box text-center">
               <div class="">
                 <h1>
                   Buy <span class="szc">SZC</span> with
                   <span class="text-success"> DALASI</span> or
-                  <span class="bnb">BNB</span>
+                  <span class="bnb">BNB</span> {{getUser.name}}
                 </h1>
               </div>
               <div class="main--calculator">
+                   <div class="mt-3 text-center">
+                    <button class="main--btn login" @click="$router.push(`/${getUser.name == 'admin' ? 'admin/dashboard' : 'user/deposit'}`)" v-if="isLoggedIn">Deposit</button>
+                    <button class="main--btn login ml-3" @click="$router.push(`/${getUser.name == 'admin' ? 'admin/dashboard' : 'user/dashboard'}`)" v-if="isLoggedIn">Withdraw</button>
+                    <button class="main--btn login" @click="goToRegister" v-if="!isLoggedIn">get started</button>
+                  </div>
+
                 <!-- First Slide  -->
-                <div class="first--slide" v-show="slide_1">
+                <!-- <div class="first--slide" v-show="slide_1">
                   <p class="small text-danger text-center mb-3 font-weight-bold" v-if="!isLoggedIn">
                     You are not logged In. Please <router-link to="/sign-up">Register</router-link> or <router-link to="/login">Login</router-link> to continue.
                   </p>
@@ -41,10 +47,10 @@
                     <button class="main--btn login" @click="buyszc" v-if="isLoggedIn">Buy</button>
                     <button class="main--btn login" @click="goToRegister" v-else>register</button>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Second Slide  -->
-                <div class="second--slide " v-show="slide_2">
+                <!-- <div class="second--slide " v-show="slide_2">
                   <div class="bank--details" v-if="currency === 'ngn' ">
                     <h4 class="mb-4">
                       Make Payment to receive
@@ -84,10 +90,10 @@
                       Continue
                     </button>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Third Slide  -->
-                <div class="third--slide" v-show="slide_3">
+                <!-- <div class="third--slide" v-show="slide_3">
                   <div class="szc--amount">
                     <label for="" class="mb-2">Enter Wallet Address</label>
                     <input type="text" v-model="payload.wallet_address" class="w-100" name="" id="" />
@@ -123,10 +129,10 @@
                       Complete
                     </button>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Completed Slide  -->
-                <div class="text-center" v-show="slide_4">
+                <!-- <div class="text-center" v-show="slide_4">
                   <span
                     class="material-icons bg-success rounded-circle text-white p-2"
                     style="font-size: 60px"
@@ -137,13 +143,12 @@
                   <h6 class="mb-3">Funds will be disbursed in...</h6>
                   <h4 id="countdown" class="mt-4"></h4>
                   <progress value="0" max="180" id="progressBar"></progress>
-                  <!-- <p>View Dashboard for Status</p> -->
                   <div class="mt-3">
                     <button class="main--btn login">
                       Go to Dashboard
                     </button>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -156,8 +161,8 @@
             <h2 class="text-center mb-4">How it Works</h2>
             <div>
               <p>
-                     Sam Zugacoin is a unique brainchild that aims to rebuild Africa's dying economy by becoming Africa's first coin in equity and investment funding for Africa's government instead of China. Starting a business in Africa can often be a gargantuan task, especially since the prospects of obtaining a loan are few and far between, we will give out loans to aid businesses and encourage investors.
-<pre></pre><b> BUYSZC ACCEPTS PAYMENTS DONE MANUALLY INTO A SPECIFIC BANK ACCOUNTS or BNB Wallets AND CONFIRMATION IS DONE 3MIN AFTER A SUCCESFUL TRANSACTION. </b>
+                     Trade Zugacoin is a unique brainchild that aims to rebuild Africa's dying economy by becoming Africa's first coin in equity and investment funding for Africa's government instead of China. Starting a business in Africa can often be a gargantuan task, especially since the prospects of obtaining a loan are few and far between, we will give out loans to aid businesses and encourage investors.
+<pre></pre><b> TRADEZUGACOIN ACCEPTS PAYMENTS DONE MANUALLY INTO A SPECIFIC BANK ACCOUNTS or BNB Wallets AND CONFIRMATION IS DONE 3MIN AFTER A SUCCESFUL TRANSACTION. </b>
 
 <pre></pre>
 You can logged into your dashboard to monitor your transaction STATUS if SUCCESFULL or PENDING.
@@ -381,7 +386,10 @@ export default {
   computed:{
     isLoggedIn(){
       return this.$store.getters.isLoggedIn
-    }
+    },
+    getUser() {
+      return this.$store.getters.getUser;
+    },
   }
 };
 </script>
@@ -876,10 +884,10 @@ br {
     /* height: 500px; */
     display: grid;
     align-items: center;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 1fr;
 }
 .main--calculator {
-    background-color: #fff;
+    /* background-color: #fff; */
     border-radius: 10px;
     /* height: 300px; */
     /* box-shadow: inset 0px 3px 4px rgba(0, 0, 0, 0.7); */

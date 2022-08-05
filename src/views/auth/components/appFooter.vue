@@ -7,8 +7,8 @@
             <div class="col-lg-4">
               <h4 class="footer--header">About Us</h4>
               <p class="">
-                BUYSZC.COM ACCEPTS PAYMENTS DONE MANUALLY INTO A SPECIFIC BANK
-                ACCOUNTS AND CONFIRMATION IS DONE 3MIN AFTER A SUCCESFUL
+                TRADEZUGACOIN.COM ACCEPTS PAYMENTS DONE MANUALLY INTO A SPECIFIC
+                BANK ACCOUNTS AND CONFIRMATION IS DONE 3MIN AFTER A SUCCESFUL
                 TRANSACTION.
               </p>
             </div>
