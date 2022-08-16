@@ -12,7 +12,7 @@ const items = [
       {
         id: 2,
         menu_item: "Users",
-        url: "/user-list",
+        url: "/admin/user-list",
         icon: "people",
       },
     ],
@@ -62,19 +62,19 @@ const items = [
       {
         id: 22,
         menu_item: "Pending Withdrawals",
-        url: "/pending",
+        url: "/admin/dashboard/withdrawals/pending",
         icon: "pending",
       },
       {
         id: 32,
         menu_item: "Completed Withdrawals",
-        url: "/completed",
+        url: "/admin/dashboard/withdrawals/completed",
         icon: "task_alt",
       },
       {
         id: 42,
         menu_item: "Cancelled Withdrawals",
-        url: "/cancelled",
+        url: "/admin/dashboard/withdrawals/cancelled",
         icon: "cancel",
       },
     ],

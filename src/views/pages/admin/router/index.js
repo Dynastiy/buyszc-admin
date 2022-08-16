@@ -1,4 +1,5 @@
 const AdminDashboard = () => import("../views/AdminDashboard");
+const UserLists = () => import("../views/UserList");
 const AdminDeposits = () => import("../views/Deposits/views/AllDeposits");
 const ViewDeposit = () => import("../views/Deposits/views/ViewDeposit");
 const PendingDeposit = () => import("../views/Deposits/views/PendingDeposit");
@@ -8,6 +9,12 @@ const CanceledDeposits = () =>
   import("../views/Deposits/views/CanceledDeposits");
 
 const AllWithdrawal = () => import("../views/Withdrawal/AllWithdrawal");
+const PendingWithdrawal = () =>
+  import("../views/Withdrawal/PendingWithdrawal.vue");
+const CompletedWithdrawal = () =>
+  import("../views/Withdrawal/CompletedWithdrawals.vue");
+const CanceledWithdrawals = () =>
+  import("../views/Withdrawal/CanceledWithdrawals.vue");
 
 import DefaultLayout from "../../../layouts/dashboardLayout.vue";
 import store from "../../../../store/index";
@@ -45,6 +52,11 @@ export default [
         component: AdminDashboard,
       },
       {
+        path: "/admin/user-list",
+        name: "Dashboard - Users",
+        component: UserLists,
+      },
+      {
         path: "/admin/dashboard/deposits",
         name: "Dashboard - Deposits",
         component: AdminDeposits,
@@ -73,6 +85,21 @@ export default [
         path: "/admin/dashboard/withdrawals",
         name: "Dashboard - Withdrawals",
         component: AllWithdrawal,
+      },
+      {
+        path: "/admin/dashboard/withdrawals/pending",
+        name: "Dashboard - Withdrawals pending",
+        component: PendingWithdrawal,
+      },
+      {
+        path: "/admin/dashboard/withdrawals/completed",
+        name: "Dashboard - Withdrawals completed",
+        component: CompletedWithdrawal,
+      },
+      {
+        path: "/admin/dashboard/withdrawals/cancelled",
+        name: "Dashboard - Withdrawals cancelled",
+        component: CanceledWithdrawals,
       },
     ],
   },
