@@ -58,7 +58,7 @@
                 <td>
                   <a
                     target="_blank"
-                    :href="'https://api.buyszc.io/' + deposit.payment_proof"
+                    :href="'https://api.buyszc.com/' + deposit.payment_proof"
                     >View Deposit Proof
                   </a>
                 </td>
@@ -66,7 +66,7 @@
                   <a
                     target="_blank"
                     :href="
-                      'https://api.buyszc.io/' +
+                      'https://api.buyszc.com/' +
                       deposit.payment_report.credit_proof
                     "
                     >View Credit Proof

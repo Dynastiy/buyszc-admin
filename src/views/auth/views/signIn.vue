@@ -42,9 +42,9 @@
               </div>
               <button type="submit" class="buy--btn" v-else>Login</button>
 
-              <router-link to="/sign-up" class="block mt-3 text-center"
+              <!-- <router-link to="/sign-up" class="block mt-3 text-center"
                 >Register Now</router-link
-              >
+              > -->
             </div>
           </form>
         </div>
@@ -71,7 +71,7 @@ export default {
       this.loading = true;
       try {
         let res = await axios.post(
-          "https://api.tradezugacoin.com/api/auth/signin",
+          "https://api.buyszc.com/api/auth/signin",
           this.credentials
         );
         const token = res.data.token;
