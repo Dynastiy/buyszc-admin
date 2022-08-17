@@ -3,8 +3,8 @@
     <div class="user-login-container">
       <div class="user--login">
         <div class="login--box">
-          <div class="mb-4 text-center">
-            <div class="text-center mb-4">
+          <div class="mb-2 text-center">
+            <div class="text-center mb-1">
               <img
                 src="@/assets/img/zugacoinpic.png"
                 width="50"
@@ -13,26 +13,26 @@
               />
             </div>
             <!-- <h2 class=" ">Admin Login</h2> -->
-            <h2 class="font-bold text-lg">Login</h2>
+            <h4 class="">Admin Login</h4>
             <!-- <small>Enter details to login</small> -->
           </div>
           <form action="" @submit.prevent="login">
-            <div class="mb-4">
-              <label class="" for="">Email</label>
+            <div class="mb-1">
+              <label class="small" for="">Email</label>
               <input type="email" v-model="credentials.email" required />
               <small class="text-danger" v-show="errorMsg"
                 >* {{ errorMsg }}
               </small>
             </div>
-            <div class="mb-4">
-              <label class="" for="">Password</label>
+            <div class="mb-2">
+              <label class="small" for="">Password</label>
               <input type="password" v-model="credentials.password" required />
               <small class="text-danger" v-show="errorMsg"
                 >* {{ errorMsg }}
               </small>
-              <small class="text-right block cursor-pointer"
+              <!-- <small class="text-right block cursor-pointer"
                 >Forgot password?
-              </small>
+              </small> -->
             </div>
             <div>
               <div class="d-flex justify-content-center" v-if="loading">
